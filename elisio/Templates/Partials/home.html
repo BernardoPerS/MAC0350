@@ -1,0 +1,24 @@
+<div>
+    <section>
+        <h1>Bem-vindo ao Elísio</h1>
+        <p>A plataforma de crowdfunding dedicada a apoiar e transformar projetos infantis.</p>
+    </section>
+
+    <hr> 
+    
+    <section>
+        <h2>Projetos Disponíveis</h2>
+        
+        <div style="margin-bottom: 20px;">
+            <input type="search" name="q" placeholder="Buscar projetos por nome..."
+                   hx-get="/projetos" 
+                   hx-target="#lista-projetos" 
+                   hx-trigger="keyup changed delay:500ms"
+                   style="padding: 10px; width: 100%; max-width: 400px;">
+        </div>
+        
+        <div id="lista-projetos" hx-get="/projetos" hx-trigger="load">
+            <p>Carregando projetos...</p>
+        </div>
+    </section>
+</div>

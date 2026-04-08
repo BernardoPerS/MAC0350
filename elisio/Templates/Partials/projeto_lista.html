@@ -1,0 +1,26 @@
+<div id="lista-projetos" style="display: flex; flex-direction: column; flex: 1;">
+    
+    <div class="grid-projetos">
+        {% for p in projetos %}
+            {% include "projeto_card.html" %}
+        {% endfor %}
+    </div>
+
+    <div class="paginacao">
+    <button hx-get="/projetos?q={{ q }}&page={{ page - 1 }}"
+            hx-target="#lista-projetos"
+            hx-swap="outerHTML"
+            {% if page <= 1 %} disabled {% endif %}>
+        Anterior
+    </button>
+
+    <span>Página {{ page }}</span>
+
+    <button hx-get="/projetos?q={{ q }}&page={{ page + 1 }}"
+            hx-target="#lista-projetos"
+            hx-swap="outerHTML"
+            {% if not tem_proximo %} disabled {% endif %}>
+        Próximo
+    </button>
+</div>
+</div>

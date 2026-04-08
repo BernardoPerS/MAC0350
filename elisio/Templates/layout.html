@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Elísio</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="layout-wrapper">
+        <nav id="menuzinho">
+            <h2>Elísio</h2>
+            <a href="#" hx-get="/" hx-target="#conteudo-principal" hx-push-url="true">Início</a>
+            
+            {% if usuario %}
+                <a href="#" hx-get="/perfil" hx-target="#conteudo-principal" hx-push-url="true">Meu Perfil</a>
+                <a href="/logout">Sair</a>
+            {% else %}
+                <a href="#" hx-get="/login" hx-target="#conteudo-principal" hx-push-url="true">Entrar</a>
+                <a href="#" hx-get="/cadastrar" hx-target="#conteudo-principal" hx-push-url="true">Criar Conta</a>
+            {% endif %}
+            
+        </nav>
+
+        <main class="container">
+    <div id="conteudo-principal">
+        {% if pagina_atual %}
+            {% include pagina_atual %}
+        {% else %}
+            {% include 'home.html' %}
+        {% endif %}
+    </div>
+</main>
+</body>
+</html>

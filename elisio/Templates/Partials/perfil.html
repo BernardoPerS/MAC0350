@@ -1,0 +1,42 @@
+<div id="area-perfil" style="max-width: 600px; margin: auto;">
+    <h2>Meu Perfil de Doador</h2>
+
+    <form hx-post="/perfil/atualizar" hx-target="#conteudo-principal" style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
+        <div style="margin-bottom: 15px;">
+            <label>Nome:</label><br>
+            <input type="text" name="nome" value="{{ usuario.nome }}" required style="width: 100%; padding: 8px;">
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <label>E-mail (Não pode ser alterado):</label><br>
+            <input type="email" value="{{ usuario.email }}" disabled style="width: 100%; padding: 8px; background: #eee;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label>Telefone:</label><br>
+            <input type="text" name="telefone" value="{{ usuario.telefone }}" required style="width: 100%; padding: 8px;">
+        </div>
+
+        <button type="submit" style="background: #4CAF50; color: white; border: none; padding: 10px 20px; cursor: pointer;">
+            Salvar Alterações
+        </button>
+    </form>
+
+    <hr style="margin: 30px 0;">
+
+    <h3>Meu Histórico</h3>
+    {% include "doacao_lista.html" %}
+
+    <hr style="margin: 30px 0;">
+
+    <div style="border: 1px solid #ffcccb; padding: 15px; border-radius: 8px; background: #fff5f5;">
+        <h4 style="color: red; margin-top: 0;">Zona de Perigo</h4>
+        <p style="font-size: 0.9em;">Ao deletar sua conta, todos os seus registros de doações serão apagados.</p>
+        
+        <button hx-delete="/perfil/deletar" 
+                hx-confirm="TEM CERTEZA? Você não tem pena das criancinhas? Se você deletar a conta, elas ficarão sem o seu apoio! 🥺"
+                style="background: #ff4444; color: white; border: none; padding: 8px 15px; cursor: pointer;">
+            Excluir minha conta
+        </button>
+    </div>
+</div>

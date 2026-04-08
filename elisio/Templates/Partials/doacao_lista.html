@@ -1,0 +1,46 @@
+<div id="lista-doacoes">
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="border-bottom: 2px solid #ddd;">
+                <th style="text-align: left; padding: 8px;">Projeto</th>
+                <th style="text-align: left; padding: 8px;">Valor</th>
+                <th style="text-align: left; padding: 8px;">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in doacoes %}
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 8px;">{{ d.projeto.titulo }}</td>
+                <td style="padding: 8px; color: green;">R$ {{ d.valor }}</td>
+                <td style="padding: 8px; font-size: 0.9em; color: gray;">
+                    {{ d.data_doacao.strftime('%d/%m/%Y %H:%M') }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" style="padding: 20px; text-align: center; color: gray;">
+                    Você ainda não realizou doações.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="paginacao">
+        <button hx-get="/perfil?page={{ page - 1 }}"
+                hx-target="#lista-doacoes"
+                hx-swap="outerHTML"
+                {% if page <= 1 %} disabled {% endif %}>
+            Anterior
+        </button>
+
+        <span>Página {{ page }}</span>
+
+        <button hx-get="/perfil?page={{ page + 1 }}"
+                hx-target="#lista-doacoes"
+                hx-swap="outerHTML"
+                {% if not tem_proximo %} disabled {% endif %}>
+            Próximo
+        </button>
+    </div>
+</div>

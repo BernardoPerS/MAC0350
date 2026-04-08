@@ -1,0 +1,31 @@
+<div class="card" id="projeto-{{ p.id }}" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: white;">
+    
+    {% if p.imagem_url %}
+        <img src="{{ p.imagem_url }}" alt="Imagem" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px;">
+    {% endif %}
+    
+    <h3 style="margin-top: 10px;">{{ p.titulo }}</h3>
+    <p><strong>Local:</strong> {{ p.localizacao }}</p>
+    <p>{{ p.proposta }}</p>
+    
+    <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee;">
+        <p style="margin-bottom: 5px; display: flex; justify-content: space-between;">
+            <span style="color: #28a745;"><strong>Arrecadado:</strong> R$ {{ p.valor_arrecadado }}</span>
+            <span style="color: gray;"><strong>Meta:</strong> R$ {{ p.meta_financeira }}</span>
+        </p>
+        <progress value="{{ p.valor_arrecadado }}" max="{{ p.meta_financeira }}" style="width: 100%; height: 20px;"></progress>
+    </div>
+
+    <div style="margin-top: 15px;">
+        {% if usuario %}
+            <form hx-put="/doar/{{ p.id }}" hx-target="#projeto-{{ p.id }}" hx-swap="outerHTML" style="display: flex; gap: 10px;">
+                <input type="number" name="valor" step="0.01" min="1" placeholder="R$ Valor" required style="width: 100px; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                <button type="submit" style="background-color: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; flex-grow: 1;">Apoiar Projeto</button>
+            </form>
+        {% else %}
+            <p style="font-size: 0.9em; color: gray;">Faça <a href="#" hx-get="/login" hx-target="#conteudo-principal" hx-push-url="true">login</a> para fazer uma doação.</p>
+        {% endif %}
+    </div>
+    
+    
+</div>

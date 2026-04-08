@@ -1,0 +1,17 @@
+<div id="area-login">
+    <h2>Acessar Conta</h2>
+    
+    <form hx-post="/login" hx-target="#area-login" hx-swap="outerHTML">
+        <div>
+            <label>E-mail:</label>
+            <input type="email" name="email" required>
+        </div>
+        <br>
+        <div>
+            <label>Senha:</label>
+            <input type="password" name="senha" required>
+        </div>
+        <br>
+        <button type="submit">Entrar</button>
+    </form>
+</div>

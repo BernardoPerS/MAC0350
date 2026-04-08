@@ -1,0 +1,27 @@
+<div id="area-cadastro">
+    <h2>Cadastrar Doador</h2>
+    
+    <form hx-post="/cadastrar" hx-target="#area-cadastro" hx-swap="outerHTML">
+        <div>
+            <label>Nome Completo:</label>
+            <input type="text" name="nome" required>
+        </div>
+        <br>
+        <div>
+            <label>Telefone:</label>
+            <input type="text" name="telefone" required>
+        </div>
+        <br>
+        <div>
+            <label>E-mail:</label>
+            <input type="email" name="email" required>
+        </div>
+        <br>
+        <div>
+            <label>Senha:</label>
+            <input type="password" name="senha" required>
+        </div>
+        <br>
+        <button type="submit">Finalizar Cadastro</button>
+    </form>
+</div>
