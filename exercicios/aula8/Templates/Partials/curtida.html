@@ -1,0 +1,20 @@
+
+<p id="contador_curtidas">
+    {{ numero_likes }}
+</p>
+
+
+<button hx-post="/curtir"
+        hx-target="#contador_curtidas"
+        hx-select="#contador_curtidas">
+    Curtir!
+</button>
+
+
+<button hx-put="/curtir"
+        hx-confirm="Tem certeza disso?"
+        hx-target="#contador_curtidas"
+        hx-select="#contador_curtidas">
+    Zerar curtidas!
+
+</button>

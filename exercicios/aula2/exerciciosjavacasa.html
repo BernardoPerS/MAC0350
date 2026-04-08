@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript dominado!</title>
+</head>
+<body>
+
+    <div>
+        <h3>Desafio 1: O Interruptor</h3>
+        <p id="texto-luz">A luz está APAGADA</p>
+        <button onclick="alternarLuz()">Alternar</button>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>Desafio 2: O Multiplicador</h3>
+        <h1 id="resultado">2</h1>
+        <button onclick="dobrar()">Dobrar</button>
+    </div>
+
+    <script>
+      
+        function alternarLuz() {
+      
+            const p = document.querySelector("#texto-luz");
+
+            if (p.innerText === "A luz está APAGADA") {
+                p.innerText = "A luz está ACESA";
+            } else {
+                p.innerText = "A luz está APAGADA";
+            }
+        }
+
+     
+        let valor = 2;
+
+        function dobrar() {
+           
+            valor = valor * 2;
+
+           
+            const display = document.querySelector("#resultado");
+            display.innerText = valor;
+
+           
+            if (valor > 100) {
+                alert(`Cuidado, o número ${valor} está ficando muito grande!`);
+            }
+        }
+    </script>
+
+</body>
+</html>

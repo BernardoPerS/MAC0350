@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Inicial</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body { font-family: sans-serif; margin: 0; }
+        header { background: #1094ab; color: white; padding: 10px; border-bottom: 4px solid #fcb421; }
+        nav { background: #eee; padding: 10px; display: flex; gap: 5px; }
+        button { padding: 8px; cursor: pointer; border: 1px solid #ccc; background: white; }
+        .active-tab { background: #64c4d2; color: white; border-color: #1094ab; }
+        main { padding: 20px; }
+    </style>
+</head>
+<body hx-on:keydown="if(event.shiftKey && event.getModifierState('AltGraph') && event.code === 'KeyP') alternarAbas()">
+
+    <header>
+        <h1>Selecione o site</h1>
+    </header>
+
+    <nav id="menu-abas">
+        <button hx-get="/aba-curtidas" hx-target="main" hx-push-url="true" class="tab-btn" onclick="selecionar(this)">Curtidas</button>
+        <button hx-get="/aba-jupiter" hx-target="main" hx-push-url="true" class="tab-btn" onclick="selecionar(this)">Júpiter</button>
+        <button hx-get="/home/kelly" hx-target="main" hx-push-url="true" class="tab-btn" onclick="selecionar(this)">Professor</button>
+    </nav>
+
+    <main hx-get="{{ pagina }}" hx-trigger="load" hx-target="this">
+        </main>
+
+    <script>
+        function selecionar(el) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+            el.classList.add('active-tab');
+        }
+
+        function alternarAbas() {
+            const botoes = document.querySelectorAll('.tab-btn');
+            let index = Array.from(botoes).findIndex(b => b.classList.contains('active-tab'));
+            let proximo = (index + 1) % botoes.length;
+            botoes[proximo].click();
+        }
+
+        document.addEventListener("htmx:afterOnLoad", function() {
+            const path = window.location.pathname;
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                if(b.getAttribute('hx-get') === path) b.classList.add('active-tab');
+            });
+        });
+    </script>
+</body>
+</html>

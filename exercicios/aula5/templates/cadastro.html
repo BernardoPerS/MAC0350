@@ -1,0 +1,55 @@
+<div id="area-cadastro">
+    <h2>Cadastrar Doador</h2>
+    
+    <form>
+        <div>
+            <label>Nome Completo:</label>
+            <input type="text" id="nome" required>
+        </div>
+        <br>
+        <div>
+            <label>Telefone:</label>
+            <input type="text" id="telefone" required>
+        </div>
+        <br>
+        <div>
+            <label>E-mail:</label>
+            <input type="email" id="email" required>
+        </div>
+        <br>
+        <div>
+            <label>Senha:</label>
+            <input type="password" id="senha" required>
+        </div>
+        <br>
+        <button type="button" onclick="enviarUsuario()">Finalizar Cadastro</button>
+    </form>
+</div>
+
+<script>
+async function enviarUsuario() {
+    const dados = {
+        nome: document.getElementById('nome').value,
+        telefone: document.getElementById('telefone').value,
+        email: document.getElementById('email').value,
+        senha: document.getElementById('senha').value
+    };
+
+    const resposta = await fetch('/cadastrar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    });
+
+    if (resposta.ok) {
+        const resultado = await resposta.json();
+        alert("Usuário " + resultado.usuario + " criado com sucesso!");
+        // Opcional: jogar o usuário para a tela de login após cadastro
+        window.location.href = "/";
+    } else {
+        alert("Erro ao enviar dados para o servidor!");
+    }
+}
+</script>
